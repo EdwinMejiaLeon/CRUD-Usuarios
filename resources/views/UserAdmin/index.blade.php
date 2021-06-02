@@ -64,7 +64,8 @@
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger">Eliminar</button>
                                     </form>
-                                    <form method="POST" class="d-inline-block pl-3" action="{{ route('admin.active',[$user->id]) }}">
+
+                                    <form method="POST" class="d-inline-block pl-3" action="{{ route('admin.active',[$user->id.",".$user->email]) }}">
                                         @csrf
                                         @method('PUT')
                                         @if( $user->state == 0)

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\notificationMailable;
 use App\Models\User;
 use App\Models\ViewSupervisor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -100,11 +102,12 @@ class UserController extends Controller
         return redirect()->back();
     }
 
-    public function active(Request $request, $id )
+    public function active($info)
     {
-        dd("entro");
-        
-        $user = User::findOrFail($id);
+        // [0] = id and [1] = email
+        $information = explode(',',$info);
+
+        $user = User::findOrFail($information[0]);
         if ($user->state == 1)
         {
             $user->state = 0;
@@ -115,6 +118,10 @@ class UserController extends Controller
         }
         $user->update();
 
+        //email
+        $email = new notificationMailable;
+        Mail::to($information[1])->send($email);
+        
         return redirect()->back();
     }
 }

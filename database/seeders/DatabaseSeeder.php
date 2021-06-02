@@ -47,16 +47,6 @@ class DatabaseSeeder extends Seeder
                     'created_at'    => Carbon::now(),
                     'updated_at'    => Carbon::now(),
                 ],
-                [
-                    #'id'           => 4,
-                    'name'          => 'Pedro Leon',
-                    'email'         => 'pedro@unal.edu.co',
-                    'role'          => 'admin',
-                    'state'         => True,
-                    'password'      => bcrypt('123456789'),
-                    'created_at'    => Carbon::now(),
-                    'updated_at'    => Carbon::now(),
-                ],
             ]
         );
     }
